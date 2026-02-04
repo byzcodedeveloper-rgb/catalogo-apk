@@ -1,20 +1,20 @@
 [
   {
-    "codigo": "P001",
-    "nombre": "Producto 1",
-    "ancho": "50 cm",
-    "alto": "100 cm",
-    "profundidad": "30 cm",
-    "precio": "$100",
+    "codigo": "L026",
+    "nombre": "Infatable",
+    "W": "3 m",
+    "L": "8 m",
+    "H": "5 cm",
+    "precio": "US$100",
     "imagen": "img/producto1.jpg"
   },
   {
-    "codigo": "P002",
-    "nombre": "Producto 2",
-    "ancho": "60 cm",
-    "alto": "120 cm",
-    "profundidad": "40 cm",
-    "precio": "$150",
+    "codigo": "L029",
+    "nombre": "Infatable",
+    "W": "4 m",
+    "L": "9 m",
+    "H": "6 m",
+    "precio": "US$150",
     "imagen": "img/producto2.jpg"
   }
 ]
