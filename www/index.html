@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Catálogo de Productos</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- jQuery y jQuery Mobile -->
+  <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+  <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+  <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+  <link rel="stylesheet" href="css/app.css">
+  <script src="js/app.js"></script>
+</head>
+<body>
+
+<!-- Página principal -->
+<div data-role="page" id="catalogo">
+  <div data-role="header">
+    <h1>Catálogo de Productos</h1>
+  </div>
+  <div data-role="content">
+    <ul data-role="listview" id="lista-productos"></ul>
+  </div>
+</div>
+
+<!-- Página de detalles -->
+<div data-role="page" id="detalle">
+  <div data-role="header">
+    <a href="#catalogo" data-role="button" data-icon="back">Atrás</a>
+    <h1>Detalles</h1>
+  </div>
+  <div data-role="content" id="detalle-contenido"></div>
+</div>
+
+</body>
+</html>
+
