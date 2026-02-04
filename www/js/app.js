@@ -23,9 +23,9 @@ $(document).on("click", "#lista-productos li a", function() {
       '<img src="' + producto.imagen + '" style="width:100%;">' +
       '<h2>' + producto.nombre + '</h2>' +
       '<p><b>Código:</b> ' + producto.codigo + '</p>' +
-      '<p><b>Ancho:</b> ' + producto.ancho + '</p>' +
-      '<p><b>Alto:</b> ' + producto.alto + '</p>' +
-      '<p><b>Profundidad:</b> ' + producto.profundidad + '</p>' +
+      '<p><b>W:</b> ' + producto.W + '</p>' +
+      '<p><b>H:</b> ' + producto.H + '</p>' +
+      '<p><b>L:</b> ' + producto.L + '</p>' +
       '<p><b>Precio:</b> ' + producto.precio + '</p>'
     );
   });
