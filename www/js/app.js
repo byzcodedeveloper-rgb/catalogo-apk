@@ -25,6 +25,7 @@ $(document).on("click", ".producto-card", function() {
 
     detalle.html(
       '<div style="text-align:center;">' +
+        // Imagen con funcionalidad de agrandar
         '<img id="producto-img" src="' + producto.imagen + '" style="width:100%; max-width:300px; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.3); margin-bottom:15px; cursor:pointer;">' +
         '<h2 style="color:#2c3e50; margin-bottom:10px;">' + producto.nombre + '</h2>' +
         '<p><b>Código:</b> ' + producto.codigo + '</p>' +
@@ -34,6 +35,10 @@ $(document).on("click", ".producto-card", function() {
         '<p style="color:#27ae60; font-weight:bold;"><b>Precio:</b> ' + producto.precio + '</p>' +
         '<a href="#" id="btn-demo" class="ui-btn ui-corner-all ui-shadow" ' +
         'style="background:#3498db; color:white; font-weight:bold; margin-top:15px;">Ver demo</a>' +
+      '</div>' +
+      // Popup oculto para imagen ampliada
+      '<div id="img-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); justify-content:center; align-items:center; z-index:9999;">' +
+        '<img src="' + producto.imagen + '" style="max-width:90%; max-height:90%; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.5);">' +
       '</div>' +
       // Popup oculto para video
       '<div id="video-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); justify-content:center; align-items:center; z-index:9999;">' +
@@ -51,9 +56,9 @@ $(document).on("click", ".producto-card", function() {
       document.getElementById("video-player").play();
     });
 
-    // Cerrar modal al hacer clic en fondo
+    // Cerrar modal de video al hacer clic en fondo
     $("#video-modal").off("click").on("click", function(e) {
-      if (e.target.id === "video-modal") { // solo si clic en fondo
+      if (e.target.id === "video-modal") {
         document.getElementById("video-player").pause();
         $(this).hide();
       }
@@ -64,7 +69,7 @@ $(document).on("click", ".producto-card", function() {
       $("#img-modal").css("display", "flex");
     });
 
-    // Cerrar modal de imagen si existiera
+    // Cerrar modal de imagen al hacer clic en fondo
     $("#img-modal").off("click").on("click", function() {
       $(this).hide();
     });
