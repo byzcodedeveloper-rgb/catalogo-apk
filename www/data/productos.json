@@ -17,5 +17,41 @@
     "precio": "US$150",
     "imagen": "img/producto2.jpg"
   }
+  {
+    "codigo": "L030",
+    "nombre": "Infatable",
+    "W": "4 m",
+    "L": "9 m",
+    "H": "6 m",
+    "precio": "US$1500",
+    "imagen": "img/producto3.jpg"
+  }
+  {
+    "codigo": "L031",
+    "nombre": "Infatable",
+    "W": "4 m",
+    "L": "9 m",
+    "H": "6 m",
+    "precio": "US$2300",
+    "imagen": "img/producto4.jpg"
+  }
+  {
+    "codigo": "L032",
+    "nombre": "Infatable",
+    "W": "4 m",
+    "L": "9 m",
+    "H": "6 m",
+    "precio": "US$3800",
+    "imagen": "img/producto5.jpg"
+  }
+  {
+    "codigo": "L033",
+    "nombre": "Infatable",
+    "W": "4 m",
+    "L": "9 m",
+    "H": "6 m",
+    "precio": "US$4000",
+    "imagen": "img/producto6.jpg"
+  }
 ]
 
