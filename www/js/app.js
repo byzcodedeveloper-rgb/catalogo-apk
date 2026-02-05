@@ -1,6 +1,5 @@
 // ==============================
 // Catálogo de productos
-// ==============================
 $(document).on("pageinit", "#catalogo", function() {
   $.getJSON("data/productos.json", function(productos) {
     var grid = $("#lista-productos");
@@ -36,16 +35,28 @@ $(document).on("click", ".producto-card", function() {
         '<a href="#" id="btn-demo" class="ui-btn ui-corner-all ui-shadow" ' +
         'style="background:#3498db; color:white; font-weight:bold; margin-top:15px;">Ver demo</a>' +
       '</div>' +
-      // Popup oculto para imagen ampliada
-      '<div id="img-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); justify-content:center; align-items:center; z-index:9999;">' +
-        '<img src="' + producto.imagen + '" style="max-width:90%; max-height:90%; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.5);">' +
+      // Popup oculto para video
+      '<div id="video-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); justify-content:center; align-items:center; z-index:9999;">' +
+        '<video id="video-player" controls style="max-width:90%; max-height:90%; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.5); background:#000;">' +
+          '<source src="video/video' + producto.codigo + '.mp4" type="video/mp4">' +
+          'Tu navegador no soporta video.' +
+        '</video>' +
       '</div>'
     );
 
-    // Acción del botón demo
+    // Acción del botón demo → abrir video
     $("#btn-demo").off("click").on("click", function(e) {
       e.preventDefault();
-      alert("Video promocional");
+      $("#video-modal").css("display", "flex");
+      document.getElementById("video-player").play();
+    });
+
+    // Cerrar modal al hacer clic en fondo
+    $("#video-modal").off("click").on("click", function(e) {
+      if (e.target.id === "video-modal") { // solo si clic en fondo
+        document.getElementById("video-player").pause();
+        $(this).hide();
+      }
     });
 
     // Acción para agrandar imagen
@@ -53,15 +64,12 @@ $(document).on("click", ".producto-card", function() {
       $("#img-modal").css("display", "flex");
     });
 
-    // Cerrar modal al hacer clic en fondo
+    // Cerrar modal de imagen si existiera
     $("#img-modal").off("click").on("click", function() {
       $(this).hide();
     });
   });
 });
-
-
-
 
 
 
