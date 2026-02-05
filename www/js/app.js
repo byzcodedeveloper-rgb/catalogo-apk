@@ -7,17 +7,22 @@ $(document).on("pageinit", "#catalogo", function() {
 
     $.each(productos, function(i, producto) {
       grid.append(
-        '<a href="#detalle" class="producto-card" data-id="' + producto.codigo + '">' +
+        '<div class="producto-card">' +
           '<img src="' + producto.imagen + '" alt="' + producto.nombre + '">' +
           '<h3>' + producto.nombre + '</h3>' +
           '<p>Código: ' + producto.codigo + '</p>' +
-        '</a>'
+          '<a href="#detalle" class="btn-detalle ui-btn ui-corner-all ui-shadow" ' +
+          'data-id="' + producto.codigo + '" ' +
+          'style="background:#27ae60; color:white; font-weight:bold; margin-top:10px;">Ver detalles</a>' +
+        '</div>'
       );
     });
   });
 });
 
-$(document).on("click", ".producto-card", function() {
+// Al hacer clic en el botón "Ver detalles", mostramos la ficha completa
+$(document).on("click", ".btn-detalle", function(e) {
+  e.preventDefault();
   var codigo = $(this).data("id");
   $.getJSON("data/productos.json", function(productos) {
     var producto = productos.find(p => p.codigo === codigo);
