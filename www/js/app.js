@@ -26,6 +26,7 @@ $(document).on("click", "#lista-productos li a", function() {
   $.getJSON("data/productos.json", function(productos) {
     var producto = productos.find(p => p.codigo === codigo);
     var detalle = $("#detalle-contenido");
+
     detalle.html(
       '<div style="text-align:center;">' +
         '<img src="' + producto.imagen + '" style="width:100%; max-width:300px; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.3); margin-bottom:15px;">' +
@@ -35,8 +36,17 @@ $(document).on("click", "#lista-productos li a", function() {
         '<p style="color:#555;"><b>H:</b> ' + producto.H + '</p>' +
         '<p style="color:#555;"><b>L:</b> ' + producto.L + '</p>' +
         '<p style="color:#27ae60; font-weight:bold;"><b>Precio:</b> ' + producto.precio + '</p>' +
+        // Botón de demo
+        '<a href="#" id="btn-demo" class="ui-btn ui-corner-all ui-shadow" ' +
+        'style="background:#3498db; color:white; font-weight:bold; margin-top:15px;">Ver demo</a>' +
       '</div>'
     );
+
+    // Acción del botón demo
+    $("#btn-demo").off("click").on("click", function(e) {
+      e.preventDefault();
+      alert("Video promocional");
+    });
   });
 });
 
