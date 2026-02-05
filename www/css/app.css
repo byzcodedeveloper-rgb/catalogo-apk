@@ -20,6 +20,8 @@ p {
   padding: 10px;
   cursor: pointer;
   transition: transform 0.2s ease;
+  text-decoration: none; /* quitar subrayado */
+  color: inherit;        /* mantener color del texto */
 }
 
 .producto-card:hover {
@@ -46,3 +48,4 @@ p {
   margin: 0;
 }
 
+  

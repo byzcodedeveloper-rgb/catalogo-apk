@@ -8,11 +8,11 @@ $(document).on("pageinit", "#catalogo", function() {
 
     $.each(productos, function(i, producto) {
       grid.append(
-        '<div class="producto-card" data-id="' + producto.codigo + '">' +
+        '<a href="#detalle" class="producto-card" data-id="' + producto.codigo + '">' +
           '<img src="' + producto.imagen + '" alt="' + producto.nombre + '">' +
           '<h3>' + producto.nombre + '</h3>' +
           '<p>Código: ' + producto.codigo + '</p>' +
-        '</div>'
+        '</a>'
       );
     });
   });
@@ -45,6 +45,7 @@ $(document).on("click", ".producto-card", function() {
     });
   });
 });
+
 
 
 
