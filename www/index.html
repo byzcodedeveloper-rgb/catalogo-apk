@@ -5,7 +5,10 @@
   <title>Catálogo de Productos</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- jQuery y jQuery Mobile -->
-  <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
+  <link rel="stylesheet" href="css/jquery.mobile.structure-1.4.5.min.css" />
+  <link rel="stylesheet" href="css/themes/ByZCatalog.min.css" />
+  <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
+
   <script src="js/jquery-1.11.1.min.js"></script>
   <script src="js/jquery.mobile-1.4.5.min.js"></script>
   <link rel="stylesheet" href="css/app.css">
@@ -15,23 +18,47 @@
 
 <!-- Página principal -->
 <div data-role="page" id="catalogo">
-  <div data-role="header">
-    <h1>Catálogo de Productos</h1>
+  <div data-role="header" data-position="fixed" class="ui-header-custom" data-theme="a">
+  <a href="#panel-categorias" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="b"></a>
+  <h1><span class="brand">Catalogo</span> <span class="year">2026</span></h1>
   </div>
-  <div data-role="content">
+
+  <div data-role="content" data-theme="a">
+    <!-- 🔎 Buscador -->
+    <input type="search" id="search-input" placeholder="Buscar producto...">
     <ul data-role="listview" id="lista-productos"></ul>
   </div>
+
+  <!-- 📂 Panel lateral de categorías -->
+  <div data-role="panel" id="panel-categorias" data-display="overlay" data-position="left">
+    <h2 data-theme="a" class="ui-bar ui-bar-a">Categorías</h2>
+    <ul data-role="listview" id="lista-categorias" data-theme="a" >
+      <li><a href="#" class="cat-option" data-cat="Infatable pack" >Infatable pack</a></li>
+      <li><a href="#" class="cat-option" data-cat="Infatable toro">Infatable toro</a></li>
+      <li><a href="#" class="cat-option" data-cat="Otros">Otros</a></li>
+    </ul>
+  </div>
+  <!-- Footer fijo -->
+<div data-role="footer" data-position="fixed" data-theme="a" class="ui-footer-custom">
+  <div class="footer-content">
+    <img src="img/logo-wey.png" alt="Wey & Asociados">
+    | Hecho por ByZcode
+  </div>
+</div>
+
 </div>
 
 <!-- Página de detalles -->
-<div data-role="page" id="detalle">
+<div data-role="page" id="detalle" data-theme="a">
   <div data-role="header">
     <a href="#catalogo" data-role="button" data-icon="back">Atrás</a>
-    <h1>Detalles< de Catalogo/h1>
+    <h1>Detalles</h1>
   </div>
-  <div data-role="content" id="detalle-contenido"></div>
-</div>
+  <div data-role="content" id="detalle-contenido" ></div>
+</div
+
+
+
 
 </body>
 </html>
-

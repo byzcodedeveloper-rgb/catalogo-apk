@@ -40,5 +40,35 @@ p {
   margin: 0;
 }
 
+.ui-header-custom h1 {
+  font-size: 1.1em;          /* Ajusta tamaño para móvil */
+  margin: 0;
+  text-align: center;        /* Centra el título */
+  white-space: nowrap;       /* Evita que se corte en varias líneas */
+  overflow: hidden;
+  text-overflow: ellipsis;   /* Si se reduce mucho, pone "..." */
+}
+
+.ui-header-custom .brand {
+  font-weight: 600;
+}
+
+.ui-header-custom .year {
+  font-weight: bold;
+  color: #0077cc;            /* Azul corporativo */
+  margin-left: 4px;          /* Espacio entre texto y año */
+}
+
+
+.ui-footer-custom .footer-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;               /* Espacio entre elementos */
+}
+
+.ui-footer-custom img {
+  height: 24px;           /* Ajusta tamaño del logo */
+}
 
   
