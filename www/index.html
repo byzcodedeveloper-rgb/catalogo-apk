@@ -19,8 +19,9 @@
 <!-- Página principal -->
 <div data-role="page" id="catalogo">
   <div data-role="header" data-position="fixed" class="ui-header-custom" data-theme="a">
-  <a href="#panel-categorias" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="b"></a>
-  <h1><span class="brand">Catalogo</span> <span class="year">2026</span></h1>
+    <a href="#panel-categorias" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="b"></a>
+    <h1><span class="brand">Catalogo</span> <span class="year">2026</span></h1>
+    <a href="#form-producto" data-role="button" data-icon="plus" data-iconpos="notext" data-theme="b">Agregar</a>
   </div>
 
   <div data-role="content" data-theme="a">
@@ -32,20 +33,22 @@
   <!-- 📂 Panel lateral de categorías -->
   <div data-role="panel" id="panel-categorias" data-display="overlay" data-position="left">
     <h2 data-theme="a" class="ui-bar ui-bar-a">Categorías</h2>
-    <ul data-role="listview" id="lista-categorias" data-theme="a" >
-      <li><a href="#" class="cat-option" data-cat="Infatable pack" >Infatable pack</a></li>
-      <li><a href="#" class="cat-option" data-cat="Infatable toro">Infatable toro</a></li>
-      <li><a href="#" class="cat-option" data-cat="Otros">Otros</a></li>
+    <ul data-role="listview" id="lista-categorias" data-theme="a">
+      <li><a href="#" class="cat-option" data-cat="Medias">Medias</a></li>
+      <li><a href="#" class="cat-option" data-cat="Boxer">Boxer</a></li>
+      <li><a href="#" class="cat-option" data-cat="Zapatos">Zapatos</a></li>
+      <li><a href="#" class="cat-option" data-cat="Pulover">Pulover</a></li>
+      <li><a href="#" class="cat-option" data-cat="Otros">Todos</a></li>
     </ul>
   </div>
-  <!-- Footer fijo -->
-<div data-role="footer" data-position="fixed" data-theme="a" class="ui-footer-custom">
-  <div class="footer-content">
-    <img src="img/logo-wey.png" alt="Wey & Asociados">
-    | Hecho por ByZcode
-  </div>
-</div>
 
+  <!-- Footer fijo -->
+  <div data-role="footer" data-position="fixed" data-theme="a" class="ui-footer-custom">
+    <div class="footer-content">
+      <img src="img/logo-wey.png" alt="Wey & Asociados">
+      | Hecho por ByZcode
+    </div>
+  </div>
 </div>
 
 <!-- Página de detalles -->
@@ -54,11 +57,58 @@
     <a href="#catalogo" data-role="button" data-icon="back">Atrás</a>
     <h1>Detalles</h1>
   </div>
-  <div data-role="content" id="detalle-contenido" ></div>
-</div
+  <div data-role="content" id="detalle-contenido"></div>
+</div>
 
-
-
+<!-- Página para agregar/editar producto (CRUD con imagen desde dispositivo) -->
+<div data-role="page" id="form-producto" data-theme="a">
+  <div data-role="header">
+    <a href="#" data-rel="back" data-role="button" data-icon="back">Cancelar</a>
+    <h1>Producto</h1>
+    <button type="button" id="guardar-producto" class="ui-btn ui-btn-b ui-corner-all" style="margin:0;">Guardar</button>
+  </div>
+  <div data-role="content">
+    <form id="producto-form">
+      <input type="hidden" id="edit-codigo" value="">
+      
+      <label for="codigo">Código:</label>
+      <input type="text" id="codigo" placeholder="Ej: A026" required>
+      
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" placeholder="Ej: Inflable pack" required>
+      
+      <label for="categoria">Categoría:</label>
+      <select id="categoria">
+        <option value="Medias">Medias</option>
+        <option value="Boxer">Boxer</option>
+        <option value="Zapatos">Zapatos</option>
+        <option value="Pulover">Pulover</option>
+        <option value="Otros">Otros</option>
+      </select>
+      
+      <label for="W">Ancho (W):</label>
+      <input type="text" id="W" placeholder="Ej: 3 m" required>
+      
+      <label for="L">Largo (L):</label>
+      <input type="text" id="L" placeholder="Ej: 8 m" required>
+      
+      <label for="H">Alto (H):</label>
+      <input type="text" id="H" placeholder="Ej: 5 m" required>
+      
+      <label for="precio">Precio:</label>
+      <input type="text" id="precio" placeholder="Ej: US$100" required>
+      
+      <!-- Nuevo selector de imagen -->
+      <label for="imagen">Imagen del producto:</label>
+      <input type="file" id="imagen" accept="image/*" capture="environment">
+      <div id="imagen-preview" style="margin:10px 0; text-align:center;">
+        <img id="preview-img" src="#" alt="Vista previa" style="max-width:100%; max-height:200px; display:none; border:1px solid #ccc; border-radius:5px;">
+      </div>
+      <!-- Campo oculto para guardar la imagen en base64 -->
+      <input type="hidden" id="imagen-base64" value="">
+    </form>
+  </div>
+</div>
 
 </body>
 </html>

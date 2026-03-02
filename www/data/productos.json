@@ -1,7 +1,8 @@
 [
   {
-    "codigo": "L026",
-    "nombre": "Infatable pack",
+    "codigo": "A026",
+    "nombre": "Medias pack",
+	"categoria": "Medias",
     "W": "3 m",
     "L": "8 m",
     "H": "5 m",
@@ -9,8 +10,9 @@
     "imagen": "img/producto1.jpg"
   },
   {
-    "codigo": "L029",
-    "nombre": "Infatable pack",
+    "codigo": "A029",
+    "nombre": "Medias pack",
+	"categoria": "Medias",
     "W": "4 m",
     "L": "9 m",
     "H": "6 m",
@@ -18,8 +20,9 @@
     "imagen": "img/producto2.jpg"
   },
   {
-    "codigo": "L030",
-    "nombre": "Infatable pack",
+    "codigo": "A030",
+    "nombre": "Medias pack",
+	"categoria": "Medias",
     "W": "4 m",
     "L": "9 m",
     "H": "6 m",
@@ -27,8 +30,9 @@
     "imagen": "img/producto3.jpg"
   },
   {
-    "codigo": "L031",
-    "nombre": "Infatable pack",
+    "codigo": "A031",
+    "nombre": "Medias pack",
+	"categoria": "Medias",
     "W": "4 m",
     "L": "9 m",
     "H": "6 m",
@@ -36,8 +40,9 @@
     "imagen": "img/producto4.jpg"
   },
   {
-    "codigo": "L032",
-    "nombre": "Infatable pack",
+    "codigo": "A032",
+    "nombre": "Boxer pack",
+	"categoria": "Boxer",
     "W": "4 m",
     "L": "9 m",
     "H": "6 m",
@@ -45,8 +50,9 @@
     "imagen": "img/producto5.jpg"
   },
   {
-    "codigo": "L033",
-    "nombre": "Infatable pack",
+    "codigo": "A033",
+    "nombre": "Boxer pack",
+	"categoria": "Boxer",
     "W": "4 m",
     "L": "9 m",
     "H": "6 m",
