@@ -1,10 +1,13 @@
+/* ===== ESTILOS GENERALES ===== */
 h2 {
   color: #0074D9;
 }
+
 p {
   font-size: 14px;
 }
 
+/* ===== TARJETAS DE PRODUCTOS (vista catálogo) ===== */
 #lista-productos {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -18,6 +21,7 @@ p {
   box-shadow: 0 2px 6px rgba(0,0,0,0.2);
   text-align: center;
   padding: 10px;
+  transition: all 0.3s ease;
 }
 
 .producto-card img {
@@ -40,13 +44,14 @@ p {
   margin: 0;
 }
 
+/* ===== HEADER PERSONALIZADO ===== */
 .ui-header-custom h1 {
-  font-size: 1.1em;          /* Ajusta tamaño para móvil */
+  font-size: 1.1em;
   margin: 0;
-  text-align: center;        /* Centra el título */
-  white-space: nowrap;       /* Evita que se corte en varias líneas */
+  text-align: center;
+  white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;   /* Si se reduce mucho, pone "..." */
+  text-overflow: ellipsis;
 }
 
 .ui-header-custom .brand {
@@ -55,20 +60,232 @@ p {
 
 .ui-header-custom .year {
   font-weight: bold;
-  color: #0077cc;            /* Azul corporativo */
-  margin-left: 4px;          /* Espacio entre texto y año */
+  color: #0077cc;
+  margin-left: 4px;
 }
 
-
+/* ===== FOOTER PERSONALIZADO ===== */
 .ui-footer-custom .footer-content {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;               /* Espacio entre elementos */
+  gap: 8px;
+  padding: 5px;
+  color: white;
 }
 
 .ui-footer-custom img {
-  height: 24px;           /* Ajusta tamaño del logo */
+  height: 24px;
+  width: auto;
 }
 
-  
+/* ===== PÁGINA DE DETALLES ===== */
+#detalle-contenido {
+  padding: 15px;
+}
+
+#detalle-contenido .medidas-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 15px 0;
+}
+
+#detalle-contenido .medida-box {
+  background: #ecf0f1;
+  padding: 10px;
+  border-radius: 8px;
+  min-width: 70px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+#detalle-contenido .medida-box p {
+  margin: 0;
+}
+
+#detalle-contenido .medida-box .medida-label {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+#detalle-contenido .medida-box .medida-valor {
+  color: #27ae60;
+}
+
+/* ===== FORMULARIO DE PRODUCTOS ===== */
+#producto-form label {
+  display: block;
+  margin: 10px 0 5px;
+  font-weight: bold;
+  color: #333;
+}
+
+#producto-form input,
+#producto-form select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+#imagen-preview {
+  margin: 10px 0;
+  text-align: center;
+}
+
+#preview-img {
+  max-width: 100%;
+  max-height: 200px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+/* ===== MODALES ===== */
+#img-modal,
+#video-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+#img-modal img,
+#video-modal video {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+#video-modal video {
+  background: #000;
+}
+
+/* ===== BOTÓN DE MODO OSCURO ===== */
+#toggle-darkmode {
+  font-size: 1.2em;
+}
+
+/* ============================================ */
+/* ========== MODO OSCURO ========== */
+/* ============================================ */
+
+/* Variables para modo oscuro */
+body.dark-mode {
+  background-color: #121212;
+  color: #f0f0f0;
+}
+
+/* Tarjetas en modo oscuro */
+body.dark-mode .producto-card {
+  background: #1e1e1e;
+  border: 1px solid #333;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+}
+
+body.dark-mode .producto-card h3 {
+  color: #ecf0f1;
+}
+
+body.dark-mode .producto-card p {
+  color: #bdc3c7;
+}
+
+/* Headers y Footers en modo oscuro */
+body.dark-mode .ui-header-custom,
+body.dark-mode .ui-footer-custom,
+body.dark-mode [data-role="header"],
+body.dark-mode [data-role="footer"] {
+  background-color: #000000 !important;
+  color: white !important;
+}
+
+/* Panel de categorías en modo oscuro */
+body.dark-mode #panel-categorias {
+  background-color: #1e1e1e;
+}
+
+body.dark-mode #panel-categorias li {
+  background-color: #2c2c2c;
+  border-color: #444;
+}
+
+body.dark-mode #panel-categorias a {
+  color: #f0f0f0 !important;
+  text-shadow: none !important;
+}
+
+/* Formularios en modo oscuro */
+body.dark-mode #producto-form label {
+  color: #f0f0f0;
+}
+
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea {
+  background-color: #2c2c2c;
+  color: #f0f0f0;
+  border-color: #555;
+}
+
+/* Botones en modo oscuro */
+body.dark-mode .ui-btn {
+  background-color: #2980b9 !important;
+  color: white !important;
+  text-shadow: none !important;
+}
+
+/* Página de detalles en modo oscuro */
+body.dark-mode #detalle-contenido h2 {
+  color: #ecf0f1 !important;
+}
+
+body.dark-mode #detalle-contenido .medida-box {
+  background: #2c2c2c;
+}
+
+body.dark-mode #detalle-contenido .medida-box .medida-label {
+  color: #ecf0f1;
+}
+
+body.dark-mode #detalle-contenido .medida-box .medida-valor {
+  color: #2ecc71;
+}
+
+/* Modales en modo oscuro */
+body.dark-mode #img-modal,
+body.dark-mode #video-modal {
+  background: rgba(0,0,0,0.95);
+}
+
+/* Ajustes adicionales */
+body.dark-mode .ui-bar-a {
+  background: #2c2c2c !important;
+  color: #f0f0f0 !important;
+}
+
+body.dark-mode .ui-header-custom .year {
+  color: #4a9eff; /* Azul más brillante para el año en modo oscuro */
+}
+
+/* Mantener los botones de acción visibles */
+body.dark-mode .btn-detalle {
+  background-color: #3498db !important;
+  color: white !important;
+}
+
+body.dark-mode #btn-editar {
+  background-color: #3498db !important;
+}
+
+body.dark-mode #btn-eliminar {
+  background-color: #c0392b !important;
+}

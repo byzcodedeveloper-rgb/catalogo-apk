@@ -21,13 +21,16 @@
   <div data-role="header" data-position="fixed" class="ui-header-custom" data-theme="a">
     <a href="#panel-categorias" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="b"></a>
     <h1><span class="brand">Catalogo</span> <span class="year">2026</span></h1>
-    <a href="#form-producto" data-role="button" data-icon="plus" data-iconpos="notext" data-theme="b">Agregar</a>
+    <div data-role="controlgroup" data-type="horizontal" class="ui-btn-right">
+      <a href="#" id="toggle-darkmode" data-role="button" data-icon="bullets" data-iconpos="notext" data-theme="b">🌙</a>
+      <a href="#form-producto" data-role="button" data-icon="plus" data-iconpos="notext" data-theme="b">Agregar</a>
+    </div>
   </div>
 
   <div data-role="content" data-theme="a">
     <!-- 🔎 Buscador -->
     <input type="search" id="search-input" placeholder="Buscar producto...">
-    <ul data-role="listview" id="lista-productos"></ul>
+    <ul data-role="listview" id="lista-productos" data-enhanced="true"></ul>
   </div>
 
   <!-- 📂 Panel lateral de categorías -->
@@ -60,7 +63,7 @@
   <div data-role="content" id="detalle-contenido"></div>
 </div>
 
-<!-- Página para agregar/editar producto (CRUD con imagen desde dispositivo) -->
+<!-- Página para agregar/editar producto -->
 <div data-role="page" id="form-producto" data-theme="a">
   <div data-role="header">
     <a href="#" data-rel="back" data-role="button" data-icon="back">Cancelar</a>
@@ -98,13 +101,11 @@
       <label for="precio">Precio:</label>
       <input type="text" id="precio" placeholder="Ej: US$100" required>
       
-      <!-- Nuevo selector de imagen -->
       <label for="imagen">Imagen del producto:</label>
-      <input type="file" id="imagen" accept="image/*" capture="environment">
+      <input type="file" id="imagen" accept="image/*">
       <div id="imagen-preview" style="margin:10px 0; text-align:center;">
         <img id="preview-img" src="#" alt="Vista previa" style="max-width:100%; max-height:200px; display:none; border:1px solid #ccc; border-radius:5px;">
       </div>
-      <!-- Campo oculto para guardar la imagen en base64 -->
       <input type="hidden" id="imagen-base64" value="">
     </form>
   </div>
