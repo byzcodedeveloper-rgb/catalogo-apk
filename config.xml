@@ -7,5 +7,16 @@
   <access origin="*" />
   <preference name="Orientation" value="portrait" />
   <preference name="Fullscreen" value="true" />
-</widget>
 
+  <!-- Permisos para Android -->
+  <platform name="android">
+    <config-file target="AndroidManifest.xml" parent="/manifest">
+      <!-- Permiso para leer archivos (necesario para seleccionar imágenes) -->
+      <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+      <!-- Para Android 13+ (API 33) se necesita este permiso específico para imágenes -->
+      <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+      <!-- Opcional: si también quieres guardar imágenes (por si acaso) -->
+      <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    </config-file>
+  </platform>
+</widget>
