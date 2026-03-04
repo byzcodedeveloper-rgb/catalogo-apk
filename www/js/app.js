@@ -1,5 +1,5 @@
 // ==============================
-// CATÁLOGO DE PRODUCTOS CON SUPABASE (VERSIÓN CORREGIDA + COMPARTIR)
+// CATÁLOGO DE PRODUCTOS CON SUPABASE (VERSIÓN CORREGIDA + COMPARTIR + ALERTAS)
 // ==============================
 
 // --- CONFIGURACIÓN INICIAL ---
@@ -7,7 +7,7 @@ const SUPABASE_URL = 'https://sfsmfoaecsozwejshitx.supabase.co'   // <-- TU URL
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNmc21mb2FlY3NvendlanNoaXR4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI1NzA5NDIsImV4cCI6MjA4ODE0Njk0Mn0.bACSidiEcc9zfLKzF8vTWECwK6iTUHoVaJb5CgWOAcw' // <-- TU ANON KEY
 const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
 
-console.log('✅ Supabase cliente inicializado:', supabaseClient ? 'OK' : 'ERROR')
+alert('✅ Supabase cliente inicializado: ' + (supabaseClient ? 'OK' : 'ERROR'))
 
 // Variables globales
 var PRODUCTOS = []
@@ -52,7 +52,7 @@ async function manejarAuth() {
 
     if (session) {
       currentUser = session.user
-      console.log('🔐 Usuario autenticado:', currentUser.email)
+      alert('🔐 Usuario autenticado: ' + currentUser.email)
       await cargarProductos()
       await cargarCategorias()
       renderCategoriasEnPanel()
@@ -71,7 +71,7 @@ async function manejarAuth() {
       }
     }
   } catch (error) {
-    console.error('Error en manejarAuth:', error)
+    alert('Error en manejarAuth: ' + error.message)
   } finally {
     authInitialized = true
   }
@@ -79,7 +79,7 @@ async function manejarAuth() {
 
 // Escuchar cambios en el estado de autenticación (login/logout en tiempo real)
 supabaseClient.auth.onAuthStateChange((event, session) => {
-  console.log('📡 Auth event:', event)
+  alert('📡 Auth event: ' + event)
   if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
     currentUser = session.user
     cargarProductos()
@@ -108,20 +108,19 @@ $(document).on('pageinit', function() {
 // ==============================
 $(document).on('submit', '#login-form', async function(e) {
   e.preventDefault()
-  console.log('🔑 Intento de login')
+  alert('🔑 Intento de login')
 
   const email = $('#login-email').val().trim()
   const password = $('#login-password').val().trim()
 
   // Validaciones básicas
   if (!email || !password) {
-    $('#login-message').text('Por favor completa todos los campos.').show()
+    alert('Por favor completa todos los campos.')
     return
   }
 
   // Deshabilitar botón y mostrar estado
   $('#btn-login').text('Ingresando...').prop('disabled', true)
-  $('#login-message').hide()
 
   try {
     const { data, error } = await supabaseClient.auth.signInWithPassword({
@@ -132,11 +131,10 @@ $(document).on('submit', '#login-form', async function(e) {
     if (error) throw error
 
     // Éxito: el evento onAuthStateChange redirigirá automáticamente
-    $('#login-message').text('').hide()
+    alert('Login exitoso, redirigiendo...')
 
   } catch (error) {
-    console.error('❌ Error en login:', error.message)
-    $('#login-message').text('Error: ' + error.message).show()
+    alert('❌ Error en login: ' + error.message)
     $('#btn-login').text('Ingresar').prop('disabled', false)
   }
 })
@@ -146,7 +144,7 @@ $(document).on('submit', '#login-form', async function(e) {
 // ==============================
 $(document).on('submit', '#registro-form', async function(e) {
   e.preventDefault()
-  console.log('📝 Intento de registro')
+  alert('📝 Intento de registro')
 
   const email = $('#reg-email').val().trim()
   const password = $('#reg-password').val().trim()
@@ -154,23 +152,22 @@ $(document).on('submit', '#registro-form', async function(e) {
 
   // Validaciones
   if (!email || !password || !confirm) {
-    $('#registro-message').text('Por favor completa todos los campos.').css('color', 'red').show()
+    alert('Por favor completa todos los campos.')
     return
   }
 
   if (password !== confirm) {
-    $('#registro-message').text('Las contraseñas no coinciden.').css('color', 'red').show()
+    alert('Las contraseñas no coinciden.')
     return
   }
 
   if (password.length < 6) {
-    $('#registro-message').text('La contraseña debe tener al menos 6 caracteres.').css('color', 'red').show()
+    alert('La contraseña debe tener al menos 6 caracteres.')
     return
   }
 
   // Deshabilitar botón
   $('#btn-registro').text('Registrando...').prop('disabled', true)
-  $('#registro-message').hide()
 
   try {
     const { data, error } = await supabaseClient.auth.signUp({
@@ -180,32 +177,23 @@ $(document).on('submit', '#registro-form', async function(e) {
 
     if (error) throw error
 
-    console.log('📦 Respuesta de registro:', data)
+    alert('📦 Respuesta de registro: ' + JSON.stringify(data))
 
     // Verificar si el usuario necesita confirmación de email
     if (data.user && data.user.identities && data.user.identities.length === 0) {
       // El usuario ya existe o requiere confirmación
-      $('#registro-message')
-        .text('Este email ya está registrado o requiere confirmación. Revisa tu bandeja de entrada.')
-        .css('color', 'orange')
-        .show()
+      alert('Este email ya está registrado o requiere confirmación. Revisa tu bandeja de entrada.')
       $('#btn-registro').text('Crear cuenta').prop('disabled', false)
     } else {
       // Registro exitoso
-      $('#registro-message')
-        .text('¡Registro exitoso! Redirigiendo...')
-        .css('color', 'green')
-        .show()
-      
-      // Si la confirmación de email está desactivada, inicia sesión automáticamente
+      alert('¡Registro exitoso! Redirigiendo...')
       setTimeout(() => {
         $.mobile.changePage('#catalogo')
       }, 1500)
     }
 
   } catch (error) {
-    console.error('❌ Error en registro:', error.message)
-    $('#registro-message').text('Error: ' + error.message).css('color', 'red').show()
+    alert('❌ Error en registro: ' + error.message)
     $('#btn-registro').text('Crear cuenta').prop('disabled', false)
   }
 })
@@ -238,7 +226,7 @@ async function cargarProductos() {
     PRODUCTOS = data || []
     renderProductos(PRODUCTOS)
   } catch (error) {
-    console.error('Error cargando productos:', error)
+    alert('Error cargando productos: ' + error.message)
   }
 }
 
@@ -363,7 +351,7 @@ $(document).on('click', '#btn-compartir', function(e) {
       text: mensaje,
       url: producto.imagen
     }).catch(error => {
-      console.log('Error al compartir:', error)
+      alert('Error al compartir: ' + error.message)
       compartirPorWhatsApp(mensaje)
     })
   } else {
@@ -446,11 +434,17 @@ $(document).on('click', '#btn-editar', function(e) {
 })
 
 // ==============================
-// SELECCIÓN DE IMAGEN (convertir a base64)
+// SELECCIÓN DE IMAGEN (convertir a base64) - VERSIÓN CON ALERTAS
 // ==============================
 $(document).on('change', '#imagen', function(e) {
+  alert('Evento change disparado en input file')
   const file = e.target.files[0]
-  if (!file) return
+  if (!file) {
+    alert('No se seleccionó ningún archivo')
+    return
+  }
+
+  alert('Archivo seleccionado: ' + file.name + ', tamaño: ' + file.size + ' bytes')
 
   if (file.size > 2 * 1024 * 1024) {
     alert('La imagen es demasiado grande. Máximo 2MB.')
@@ -458,20 +452,29 @@ $(document).on('change', '#imagen', function(e) {
     return
   }
 
+  alert('Iniciando FileReader...')
   const reader = new FileReader()
   reader.onload = function(ev) {
+    alert('FileReader onload disparado, resultado obtenido')
     const base64 = ev.target.result
     $('#imagen-base64').val(base64)
     $('#preview-img').attr('src', base64).show()
+    alert('Preview actualizado')
+  }
+  reader.onerror = function(ev) {
+    alert('Error en FileReader: ' + ev.target.error)
   }
   reader.readAsDataURL(file)
+  alert('readAsDataURL llamado')
 })
 
 // ==============================
-// GUARDAR PRODUCTO (INSERTAR O ACTUALIZAR)
+// GUARDAR PRODUCTO (INSERTAR O ACTUALIZAR) - VERSIÓN CON ALERTAS
 // ==============================
 $(document).on('click', '#guardar-producto', async function(e) {
   e.preventDefault()
+
+  alert('Iniciando guardar producto')
 
   if (!currentUser) {
     alert('Debes iniciar sesión')
@@ -489,6 +492,9 @@ $(document).on('click', '#guardar-producto', async function(e) {
   const precio = $('#precio').val().trim()
   let imagenBase64 = $('#imagen-base64').val()
 
+  alert('Valores capturados: codigo=' + codigo + ', nombre=' + nombre + ', categoria=' + categoria + ', W=' + W + ', L=' + L + ', H=' + H + ', precio=' + precio)
+  alert('imagenBase64 (primeros 50 chars): ' + (imagenBase64 ? imagenBase64.substring(0,50) : 'vacío'))
+
   // Validaciones
   if (!codigo || !nombre || !W || !L || !H || !precio) {
     alert('Por favor completa todos los campos.')
@@ -504,6 +510,7 @@ $(document).on('click', '#guardar-producto', async function(e) {
     const original = PRODUCTOS.find(p => p.id == idEdicion)
     if (original) {
       imagenBase64 = original.imagen
+      alert('Usando imagen original')
     } else {
       alert('Error al recuperar la imagen original.')
       return
@@ -522,16 +529,21 @@ $(document).on('click', '#guardar-producto', async function(e) {
     imagen: imagenBase64
   }
 
+  alert('Objeto producto construido: ' + JSON.stringify(producto))
+
   try {
     if (idEdicion) {
+      alert('Modo edición')
       // ACTUALIZAR: verificar código duplicado (excluyendo el actual)
       if (codigo !== $('#edit-codigo').val()) {
-        const { data: existentes } = await supabaseClient
+        const { data: existentes, error: countError } = await supabaseClient
           .from('productos')
           .select('id')
           .eq('user_id', currentUser.id)
           .eq('codigo', codigo)
           .neq('id', idEdicion)
+
+        if (countError) throw countError
 
         if (existentes && existentes.length > 0) {
           alert('Ya existe otro producto con ese código.')
@@ -546,13 +558,17 @@ $(document).on('click', '#guardar-producto', async function(e) {
         .eq('user_id', currentUser.id)
 
       if (error) throw error
+      alert('Producto actualizado correctamente')
     } else {
+      alert('Modo inserción')
       // INSERTAR: verificar código único
-      const { data: existentes } = await supabaseClient
+      const { data: existentes, error: countError } = await supabaseClient
         .from('productos')
         .select('id')
         .eq('user_id', currentUser.id)
         .eq('codigo', codigo)
+
+      if (countError) throw countError
 
       if (existentes && existentes.length > 0) {
         alert('Ya existe un producto con ese código.')
@@ -564,6 +580,7 @@ $(document).on('click', '#guardar-producto', async function(e) {
         .insert([producto])
 
       if (error) throw error
+      alert('Producto insertado correctamente')
     }
 
     // Éxito: recargar productos y volver al catálogo
@@ -601,7 +618,7 @@ async function cargarCategorias() {
     CATEGORIAS = data || []
     return CATEGORIAS
   } catch (error) {
-    console.error('Error cargando categorías:', error)
+    alert('Error cargando categorías: ' + error.message)
     return []
   }
 }
@@ -687,12 +704,14 @@ $(document).on('submit', '#form-categoria', async function(e) {
         .eq('id', id)
         .eq('user_id', currentUser.id)
       if (error) throw error
+      alert('Categoría actualizada')
     } else {
       // Nueva
       const { error } = await supabaseClient
         .from('categorias')
         .insert([{ user_id: currentUser.id, nombre }])
       if (error) throw error
+      alert('Categoría creada')
     }
     
     // Recargar categorías y actualizar UI
@@ -732,6 +751,7 @@ $(document).on('click', '.delete-categoria', async function(e) {
       .eq('user_id', currentUser.id)
     if (error) throw error
     
+    alert('Categoría eliminada')
     // Recargar
     await cargarCategorias()
     renderCategoriasEnGestion()
