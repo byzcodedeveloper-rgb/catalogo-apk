@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.byZcode.catalogo" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+<widget id="com.byZcode.catalogo" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>CatalogoProductos</name>
   <description>Catálogo de productos en jQuery Mobile</description>
   <author email="jose@byzcode.cu">Jose</author>
@@ -7,13 +7,4 @@
   <access origin="*" />
   <preference name="Orientation" value="portrait" />
   <preference name="Fullscreen" value="true" />
-
-  <!-- Permisos para Android -->
-  <platform name="android">
-    <config-file target="AndroidManifest.xml" parent="/manifest">
-      <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-      <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
-      <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    </config-file>
-  </platform>
 </widget>
