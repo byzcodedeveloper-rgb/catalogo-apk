@@ -1,5 +1,5 @@
 // ==============================
-// CATÁLOGO DE PRODUCTOS CON SUPABASE (VERSIÓN CORREGIDA + COMPARTIR + ALERTAS)
+// CATÁLOGO DE PRODUCTOS CON SUPABASE (VERSIÓN CORREGIDA + COMPARTIR + ALERTAS + PLUGIN CÁMARA)
 // ==============================
 
 // --- CONFIGURACIÓN INICIAL ---
@@ -434,39 +434,61 @@ $(document).on('click', '#btn-editar', function(e) {
 })
 
 // ==============================
-// SELECCIÓN DE IMAGEN (convertir a base64) - VERSIÓN CON ALERTAS
+// SELECCIÓN DE IMAGEN CON PLUGIN CÁMARA (para móvil) Y FALLBACK
 // ==============================
-$(document).on('change', '#imagen', function(e) {
-  alert('Evento change disparado en input file')
-  const file = e.target.files[0]
-  if (!file) {
-    alert('No se seleccionó ningún archivo')
-    return
-  }
+$(document).on('click', '#btn-seleccionar-imagen', function(e) {
+  e.preventDefault();
+  alert('📸 Abriendo selector de imágenes...');
 
-  alert('Archivo seleccionado: ' + file.name + ', tamaño: ' + file.size + ' bytes')
-
-  if (file.size > 2 * 1024 * 1024) {
-    alert('La imagen es demasiado grande. Máximo 2MB.')
-    $(this).val('')
-    return
+  // Verificar si el plugin de cámara está disponible (solo en dispositivo)
+  if (typeof navigator.camera !== 'undefined' && navigator.camera) {
+    // Usar el plugin
+    navigator.camera.getPicture(
+      function(imageData) {
+        // Éxito: imageData es la imagen en base64 (con el prefijo data:image/jpeg;base64,)
+        alert('✅ Imagen seleccionada. Procesando...');
+        $('#imagen-base64').val(imageData);
+        $('#preview-img').attr('src', imageData).show();
+        alert('✅ Imagen cargada y previsualización actualizada.');
+      },
+      function(error) {
+        alert('❌ Error al seleccionar imagen: ' + error);
+      },
+      {
+        quality: 80,
+        destinationType: Camera.DestinationType.DATA_URL, // base64
+        sourceType: Camera.PictureSourceType.PHOTOLIBRARY, // desde galería
+        encodingType: Camera.EncodingType.JPEG,
+        mediaType: Camera.MediaType.PICTURE,
+        correctOrientation: true,
+        saveToPhotoAlbum: false
+      }
+    );
+  } else {
+    // Fallback para navegador web: crear un input file temporal
+    alert('ℹ️ Plugin no disponible, usando input file como respaldo.');
+    var input = $('<input type="file" accept="image/*">');
+    input.on('change', function() {
+      var file = this.files[0];
+      if (!file) return;
+      if (file.size > 2 * 1024 * 1024) {
+        alert('❌ Imagen demasiado grande (>2MB)');
+        return;
+      }
+      var reader = new FileReader();
+      reader.onload = function(ev) {
+        $('#imagen-base64').val(ev.target.result);
+        $('#preview-img').attr('src', ev.target.result).show();
+        alert('✅ Imagen cargada (fallback).');
+      };
+      reader.onerror = function() {
+        alert('❌ Error al leer archivo.');
+      };
+      reader.readAsDataURL(file);
+    });
+    input.click();
   }
-
-  alert('Iniciando FileReader...')
-  const reader = new FileReader()
-  reader.onload = function(ev) {
-    alert('FileReader onload disparado, resultado obtenido')
-    const base64 = ev.target.result
-    $('#imagen-base64').val(base64)
-    $('#preview-img').attr('src', base64).show()
-    alert('Preview actualizado')
-  }
-  reader.onerror = function(ev) {
-    alert('Error en FileReader: ' + ev.target.error)
-  }
-  reader.readAsDataURL(file)
-  alert('readAsDataURL llamado')
-})
+});
 
 // ==============================
 // GUARDAR PRODUCTO (INSERTAR O ACTUALIZAR) - VERSIÓN CON ALERTAS

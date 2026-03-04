@@ -104,6 +104,7 @@
 </div>
 
 <!-- Página para agregar/editar producto -->
+<!-- Página para agregar/editar producto -->
 <div data-role="page" id="form-producto" data-theme="a">
   <div data-role="header">
     <a href="#" data-rel="back" data-role="button" data-icon="back">Cancelar</a>
@@ -138,8 +139,9 @@
       <label for="precio">Precio:</label>
       <input type="text" id="precio" placeholder="Ej: US$100" required>
       
+      <!-- Nuevo botón para seleccionar imagen con plugin -->
       <label for="imagen">Imagen del producto:</label>
-      <input type="file" id="imagen" accept="image/*" capture="environment">
+      <button type="button" id="btn-seleccionar-imagen" class="ui-btn ui-btn-b ui-corner-all">Seleccionar imagen</button>
       <div id="imagen-preview" style="margin:10px 0; text-align:center;">
         <img id="preview-img" src="#" alt="Vista previa" style="max-width:100%; max-height:200px; display:none; border:1px solid #ccc; border-radius:5px;">
       </div>

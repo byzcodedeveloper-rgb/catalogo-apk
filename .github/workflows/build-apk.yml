@@ -27,6 +27,10 @@ jobs:
       - name: Add Android platform
         run: |
           cordova platform add android
+          
+      # NUEVO: Instalar plugin de cámara
+      - name: Install Camera plugin
+        run: cordova plugin add cordova-plugin-camera
 
       # 5. Compilar APK
       - name: Build APK
